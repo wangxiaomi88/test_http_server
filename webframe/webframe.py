@@ -8,6 +8,7 @@ from urls import *
 # 应用类，处理请求
 class Application(Thread):
     def __init__(self,c):
+        super().__init__()
         self.c=c
 
 
