@@ -23,6 +23,7 @@ def connect_frame(env):
     # 等待后端数据回复
     try:
         data = s.recv(1024 * 1024 * 10).decode()
+        print(data)
         return json.loads(data)
     except Exception as e:
         return
@@ -79,21 +80,23 @@ class HTTPserver:
     def response(self,c,data):
         # data --> {'status':200,data:''xxxx'}
         if data["status"] == "200":
+            print("检查点")
             responseHeader = "HTTP/1.1 200 OK\r\n"
             responseHeader += "Content-Type:text/html\r\n"
             responseHeader += "\r\n"
             responseBody = data["data"]
 
-        if data["status"] == "400":
+        if data["status"] == "404":
             responseHeader = "HTTP/1.1 404 Not Found\r\n"
             responseHeader += "Content-Type:text/html\r\n"
             responseHeader += "\r\n"
             responseBody = data["data"]
 
 
-            #将数据发送给浏览器
-            responseData=responseHeader+responseBody
-            c.send(responseData.encode())
+        #将数据发送给浏览器
+        responseData=responseHeader + responseBody
+        print("给浏览器的",responseData)
+        c.send(responseData.encode())
 
 
 

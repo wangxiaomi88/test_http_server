@@ -8,16 +8,18 @@ from urls import *
 # 应用类，处理请求
 class Application(Thread):
     def __init__(self,c):
+        super().__init__()
         self.c=c
 
 
-    def get_heml(self,info):
+    def get_html(self,info):
         if info == "/":
-            filename = STATIC + ".index.html"
+            filename = STATIC + "/haha.html"
         else:
             filename = STATIC + info
 
         try:
+            print(filename)
             fd=open(filename)
         except Exception as e:
             with open(STATIC + "/404.html") as f:
