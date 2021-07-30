@@ -62,7 +62,7 @@ class HTTPserver:
         # print(request)
 
         # 从request提取请求类型和请求内容
-        pattern = r"(?P<methon>[A-Z]+)\s+(?P<info>/\S*)"
+        pattern = r"(?P<method>[A-Z]+)\s+(?P<info>/\S*)"
         try:
             env = re.match(pattern, request).groupdict()
         except:
